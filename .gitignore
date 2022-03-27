@@ -1,1 +1,6 @@
 .DS_Store
+runs/
+__pycache__
+ckpt.t7
+*.pt
+
