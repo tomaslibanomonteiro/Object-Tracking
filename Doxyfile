@@ -1,0 +1,14 @@
+PROJECT_NAME      = "Agil Object Mapping"
+PROJECT_BRIEF = "Project to map players on a sports court onto their coordinates on the field using a Neural Network" 
+OUTPUT_DIRECTORY  = "./doc/"
+OUTPUT_LANGUAGE = English
+REPEAT_BRIEF = YES
+GENERATE_LATEX    = NO
+GENERATE_MAN      = NO
+GENERATE_RTF      = NO
+OPTIMIZE_OUTPUT_JAVA = YES
+QUIET             = YES
+RECURSIVE = YES
+JAVADOC_AUTOBRIEF = YES
+SEARCHENGINE      = NO
+USE_MDFILE_AS_MAINPAGE = README.md
