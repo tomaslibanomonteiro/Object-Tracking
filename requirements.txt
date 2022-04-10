@@ -1,1 +1,6 @@
+numpy
 flask
+flake8
+pandas
+opencv-python
+scikit-image
