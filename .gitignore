@@ -6,6 +6,13 @@
 # file properties cache/storage on macOS
 .DS_Store
 
+# Video resources and csv datafiles
+data/datafiles
+data/videos
+
+
+
+
 ### Python ###
 # Byte-compiled / optimized / DLL files
 __pycache__/
