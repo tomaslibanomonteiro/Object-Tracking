@@ -55,11 +55,12 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 # @brief Converts the original csv to one with the specified collumns
 # @param path to csv file
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
-def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg'], file_name='simple_2022-03-01_17-38_positions'):
+def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg'], file_name='simple_2022-03-01_17-38_positions.csv'):
     df = pd.read_csv(path, sep=';', header=0,
                      skipinitialspace=True, usecols=fields)
     useful_columns = fields
-    df.loc[:, useful_columns].to_csv('../data/datafiles/new.csv')
+    path = '../data/datafiles/' + file_name
+    df.loc[:, useful_columns].to_csv(path)
 
 
 # @brief creates small stack of array from input video
@@ -123,3 +124,6 @@ def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale
     cut_csv = downsampleCSV(df_csv, times)
 
 # @} */ // end of group1
+
+
+transformToSimpleCSV('../data/datafiles/2022-03-01_17-38_positions.csv')
