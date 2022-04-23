@@ -55,12 +55,30 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 # @brief Converts the original csv to one with the specified collumns
 # @param path to csv file
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
-def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg'], file_name='simple_2022-03-01_17-38_positions.csv'):
-    df = pd.read_csv(path, sep=';', header=0,
-                     skipinitialspace=True, usecols=fields)
+def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
     useful_columns = fields
-    path = '../data/datafiles/' + file_name
-    df.loc[:, useful_columns].to_csv(path)
+
+    # Reading the entire file will cause out of memory,
+    # create chunk to deal with it.
+    chunksize = 1000000
+    df = pd.DataFrame()
+    for chunk in (pd.read_csv(path,sep=';',header=0,skipinitialspace=True, 
+                            usecols=fields,engine='python',quoting=3,
+                          chunksize=chunksize)):
+        df = pd.concat([df, chunk], ignore_index=True)
+
+    # find the index of '/' in the path 
+    fraction = []
+    for index,element in enumerate(path):
+        if element == '/':
+            fraction.append(index)
+            
+    # By separating '/' in the path, we can get dir path and file
+    # Drop the '.csv' and get the filename
+    filename = path[(fraction[-1]+1):-4] 
+    suffix = '_simplified'
+    newfile_path = path[:fraction[-1]+1] + filename + suffix + '.csv'
+    df.loc[:, useful_columns].to_csv(newfile_path)
 
 
 # @brief creates small stack of array from input video
