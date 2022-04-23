@@ -49,6 +49,13 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
     return people_times
 
 
+def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg'], file_name='simple_2022-03-01_17-38_positions'):
+    df = pd.read_csv(path, sep=';', header=0,
+                     skipinitialspace=True, usecols=fields)
+    useful_columns = fields
+    df.loc[:, useful_columns].to_csv('../data/datafiles/new.csv')
+
+
 def videoCaptureToNpArray(cap, start_frame, num_frames=100, out_fps=1):
     frames = []
     fps = int(cap.get(5))
@@ -78,8 +85,4 @@ def createSnippet():
     pass
 
 
-print("Hello world")
-ola = loadInputCsvFromPath('../data/datafiles/2022-03-01_17-38_positions.csv')
-# ola = loadInputCsvFromPath('../data/datafiles/2022-0301_17-38_postion_small.csv')
-
-print(ola[0].time_id)
+transformToSimpleCSV('../data/datafiles/2022-03-01_17-38_positions.csv')
