@@ -1,5 +1,6 @@
 import numpy as np
 import pandas as pd
+import os
 
 # import cv2
 
@@ -55,11 +56,12 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 # @brief Converts the original csv to one with the specified collumns
 # @param path to csv file
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
-def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg'], file_name='simple_2022-03-01_17-38_positions.csv'):
+def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
     df = pd.read_csv(path, sep=';', header=0,
                      skipinitialspace=True, usecols=fields)
     useful_columns = fields
-    path = '../data/datafiles/' + file_name
+    file_name = os.path.basename(path)
+    path = '../data/datafiles/simple_' + file_name
     df.loc[:, useful_columns].to_csv(path)
 
 
