@@ -1,6 +1,6 @@
 import numpy as np
 import pandas as pd
-
+import os
 # import cv2
 
 
@@ -60,6 +60,7 @@ def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 
     # Reading the entire file will cause out of memory,
     # create chunk to deal with it.
+
     chunksize = 1000000
     df = pd.DataFrame()
     for chunk in (pd.read_csv(path,sep=';',header=0,skipinitialspace=True, 
@@ -67,18 +68,13 @@ def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
                           chunksize=chunksize)):
         df = pd.concat([df, chunk], ignore_index=True)
 
-    # find the index of '/' in the path 
-    fraction = []
-    for index,element in enumerate(path):
-        if element == '/':
-            fraction.append(index)
-            
-    # By separating '/' in the path, we can get dir path and file
-    # Drop the '.csv' and get the filename
-    filename = path[(fraction[-1]+1):-4] 
-    suffix = '_simplified'
-    newfile_path = path[:fraction[-1]+1] + filename + suffix + '.csv'
-    df.loc[:, useful_columns].to_csv(newfile_path)
+    file_name = os.path.basename(path) 
+    newfile_name = 'simple_' + file_name
+    dir_name = os.path.dirname(path)
+    path = os.path.join(dir_name, newfile_name)
+    print(path)
+
+    df.loc[:, useful_columns].to_csv(path)
 
 
 # @brief creates small stack of array from input video
