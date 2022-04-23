@@ -123,6 +123,3 @@ def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale
     cut_csv = downsampleCSV(df_csv, times)
 
 # @} */ // end of group1
-
-
-transformToSimpleCSV('../data/datafiles/2022-03-01_17-38_positions.csv')
