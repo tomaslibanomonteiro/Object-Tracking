@@ -1,6 +1,9 @@
 import numpy as np
 import pandas as pd
 import cv2
+import os
+
+
 
 class PersonTime:
     def __init__(self, time_id, person_id, x_coord, y_coord):
@@ -10,11 +13,11 @@ class PersonTime:
         self.y_coord = y_coord
 
 
-## @defgroup group1 DataFactory
+# @defgroup group1 DataFactory
  #  Methods of Data Factory
  #  @{
 
-## @brief imports mp4 from path for further processing
+# @brief imports mp4 from path for further processing
 # @param path to mp4 file
 # @return video as cv2VideoCapture - None on error
 def loadInputVideoFromPath(path):
@@ -31,10 +34,10 @@ def loadInputVideoFromPath(path):
     return vid_input
 
 
-## @brief import csv from path for further processing
+# @brief import csv from path for further processing
 # @param path to csv file
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
-# @return input csv as list 
+# @return input csv as list
 def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
     df = pd.read_csv(path, sep=';', header=0,
                      skipinitialspace=True, usecols=fields)
@@ -50,9 +53,34 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
     return df
 
 
-## @brief creates small stack of array from input video 
+# @brief Converts the original csv to one with the specified collumns
+# @param path to csv file
+# @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
+def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
+    useful_columns = fields
+
+    # Reading the entire file will cause out of memory,
+    # create chunk to deal with it.
+
+    chunksize = 1000000
+    df = pd.DataFrame()
+    for chunk in (pd.read_csv(path,sep=';',header=0,skipinitialspace=True, 
+                            usecols=fields,engine='python',quoting=3,
+                          chunksize=chunksize)):
+        df = pd.concat([df, chunk], ignore_index=True)
+
+    file_name = os.path.basename(path) 
+    newfile_name = 'simple_' + file_name
+    dir_name = os.path.dirname(path)
+    path = os.path.join(dir_name, newfile_name)
+    print(path)
+
+    df.loc[:, useful_columns].to_csv(path)
+
+
+# @brief creates small stack of array from input video
 # @param cap input video capture
-# @param start_frame frame number of cap to start with  
+# @param start_frame frame number of cap to start with
 # @param in_fps fps of input cap
 # @param out_fps target fps of array
 # @param num_frames target frame number of array
@@ -72,9 +100,10 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
             frame = cv2.resize(frame, rescale)
         if ret:
             frames.append(frame)
-            # Only even values to avoid time drift 
-            frame_time = cap.get(cv2.CAP_PROP_POS_MSEC) + (cap.get(cv2.CAP_PROP_POS_MSEC)%2)
-            frame_times.append(frame_time)  
+            # Only even values to avoid time drift
+            frame_time = cap.get(cv2.CAP_PROP_POS_MSEC) + \
+                (cap.get(cv2.CAP_PROP_POS_MSEC) % 2)
+            frame_times.append(frame_time)
         frame_number += int(in_fps/out_fps)
     video = np.stack(frames, axis=0)  # dimensions (T, H, W, C)
     times = np.array(frame_times)
@@ -83,8 +112,8 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
 
 ## @brief get corresponding data of input times 
 # @param df_csv dataframe csv with sensor output
-# @param relevant_times times 
-# @return sub_csv subset of input frame only containing relevant times 
+# @param relevant_times times
+# @return sub_csv subset of input frame only containing relevant times
 def downsampleCSV(df_csv, relvant_times):
     sub_csv = []
     for time in relvant_times:
@@ -112,14 +141,15 @@ def getSensordataForFrame(df_csv, time):
 
 ## @brief creates small stack of array from input video 
 # @param cap input video capture
-# @param start_frame frame number of cap to start with  
+# @param start_frame frame number of cap to start with
 # @param out_fps target fps of array
 # @param num_frames target frame number of array
 # @param rescale rescale dimensio (x,y) if needed
 def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale=(480, 270)):
     in_fps = int(cap.get(5))
-    csv_start_time = df_csv.at[1,'ts in ms']
-    times, cut_cap = videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale)
+    csv_start_time = df_csv.at[1, 'ts in ms']
+    times, cut_cap = videoCaptureToNpArray(
+        cap, start_frame, in_fps, out_fps, num_frames, rescale)
     times += csv_start_time
     cut_csv = downsampleCSV(df_csv, times)
 

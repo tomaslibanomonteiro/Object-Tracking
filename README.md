@@ -44,7 +44,7 @@ $ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/da
 </details>
 
 <details open>
-<summary>Interence with train.py</summary>
+<summary>Training</summary>
 
 ```bash
 $ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/datafiles/2022-03-01_17-38_positions.csv
