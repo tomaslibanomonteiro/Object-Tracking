@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
+import cv2
 
-# import cv2
 class PersonTime:
     def __init__(self, time_id, person_id, x_coord, y_coord):
         self.time_id = time_id
@@ -38,16 +38,16 @@ def loadInputVideoFromPath(path):
 def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
     df = pd.read_csv(path, sep=';', header=0,
                      skipinitialspace=True, usecols=fields)
-    people_times = []
-    for row_idx in df.index:
-        person_time = PersonTime(
-            df['ts in ms'][row_idx],
-            df['mapped id'][row_idx],
-            df['x in m'][row_idx],
-            df['y in m'][row_idx])
-        people_times.append(person_time)
+    # people_times = []
+    # for row_idx in df.index:
+    #     person_time = PersonTime(
+    #         df['ts in ms'][row_idx],
+    #         df['mapped id'][row_idx],
+    #         df['x in m'][row_idx],
+    #         df['y in m'][row_idx])
+    #     people_times.append(person_time)
 
-    return people_times
+    return df
 
 
 ## @brief creates small stack of array from input video 
@@ -57,8 +57,7 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 # @param out_fps target fps of array
 # @param num_frames target frame number of array
 # @param rescale rescale dimensio (x,y) if needed
-# @return times of frames within stack 
-# @return video stack of np arrays
+# @return times of frames within stack, video stack of np arrays
 def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale):
     frames = []
     frame_times = []
@@ -66,7 +65,7 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
     frame_number = start_frame
     end_frame = start_frame + num_frames * int(in_fps/out_fps)
 
-    while ret and frame_number <= end_frame:
+    while ret and frame_number < end_frame:
         cap.set(cv2.CAP_PROP_FRAME_COUNT, frame_number-1)
         ret, frame = cap.read()  # read one frame from the 'capture' object; img is (H, W, C)
         if rescale is not None:
@@ -82,18 +81,33 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
     return times, video
 
 
-
 ## @brief get corresponding data of input times 
 # @param df_csv dataframe csv with sensor output
 # @param relevant_times times 
 # @return sub_csv subset of input frame only containing relevant times 
 def downsampleCSV(df_csv, relvant_times):
-    # TODO: check problem missmatching times ? -> idea for better solution? 
-    tolerance_times = np.array([relvant_times + i for i in range(-1, 2)])
-    sub_csv = df_csv[df_csv['ts in ms'].isin(tolerance_times)]
-    set_ts = set(sub_csv['ts in ms'])
-    print("Rows in sub df: ", len(sub_csv))
+    sub_csv = []
+    for time in relvant_times:
+        df_sensor = getSensordataForFrame(df_csv, time)
+        sub_csv.append(df_sensor)
+    sub_df = pd.concat(sub_csv, axis=0, ignore_index=True)
+    set_ts = set(sub_df['ts in ms'])
+    print("Rows in sub df: ", len(sub_df))
     return sub_csv
+
+
+## @brief get corresponding sensor data of csv for input time
+# @param df_csv dataframe csv with sensor output
+# @param time time of frame 
+# @return sensor_data subset df of sensor data from frame
+def getSensordataForFrame(df_csv, time):
+    sensor_data = None
+    for tolerance in range(-3, 4):
+        sensor_data = df_csv[df_csv['ts in ms'] == (tolerance + time)]
+        if not sensor_data.empty:
+            return sensor_data  
+    # Todo throw error
+    return sensor_data
 
 
 ## @brief creates small stack of array from input video 
@@ -109,11 +123,9 @@ def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale
     times += csv_start_time
     cut_csv = downsampleCSV(df_csv, times)
 
-## @} */ // end of group1
+## @} */ // end of Data Factory
 
-print("Hello world")
-ola = loadInputCsvFromPath('../data/datafiles/2022-03-01_17-38_positions.csv')
-# ola = loadInputCsvFromPath('../data/datafiles/2022-0301_17-38_postion_small.csv')
-
-print(ola[0].time_id)
+# vcap = loadInputVideoFromPath("./data/20220301-1638-214.mp4")
+# csv = loadInputCsvFromPath("./data/2022-03-01_17-38_positions-7.csv")
+# test = downsampleInput(vcap, csv, 0)
 
