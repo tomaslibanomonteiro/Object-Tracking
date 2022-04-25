@@ -59,3 +59,13 @@ Click links to download [videos files](https://drive.google.com/file/d/1OrTUqcDl
 
 
 </details>
+<details open>
+<summary>Run demo of background removal</summary>
+
+There are two slected algorithms: 'KNN', 'MOG2'
+
+```bash
+$ python demo_background_removal.py --input data/videos/20220301-1638-214.mp4 --algo 'MOG2'
+```
+
+</details>
