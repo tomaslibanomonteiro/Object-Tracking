@@ -13,11 +13,11 @@ class PersonTime:
         self.y_coord = y_coord
 
 
-# @defgroup group1 DataFactory
- #  Methods of Data Factory
- #  @{
+## @defgroup group1 DataFactory
+#  Methods of Data Factory
+#  @{
 
-# @brief imports mp4 from path for further processing
+## @brief imports mp4 from path for further processing
 # @param path to mp4 file
 # @return video as cv2VideoCapture - None on error
 def loadInputVideoFromPath(path):
@@ -34,7 +34,7 @@ def loadInputVideoFromPath(path):
     return vid_input
 
 
-# @brief import csv from path for further processing
+## @brief import csv from path for further processing
 # @param path to csv file
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
 # @return input csv as list
@@ -53,7 +53,7 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
     return df
 
 
-# @brief Converts the original csv to one with the specified collumns
+## @brief Converts the original csv to one with the specified collumns
 # @param path to csv file
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
 def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
@@ -78,7 +78,7 @@ def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
     df.loc[:, useful_columns].to_csv(path)
 
 
-# @brief creates small stack of array from input video
+## @brief creates small stack of array from input video
 # @param cap input video capture
 # @param start_frame frame number of cap to start with
 # @param in_fps fps of input cap
