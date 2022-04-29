@@ -95,10 +95,13 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
 
     while ret and frame_number < end_frame:
         cap.set(cv2.CAP_PROP_FRAME_COUNT, frame_number-1)
-        ret, frame = cap.read()  # read one frame from the 'capture' object; img is (H, W, C)
-        if rescale is not None:
-            frame = cv2.resize(frame, rescale)
+        ret, frame = cap.read()
+        # read one frame from the 'capture' object; img is (H, W, C)
         if ret:
+            if rescale is not None:
+                frame = cv2.resize(frame, rescale)
+            
+            frame  = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)     
             frames.append(frame)
             # Only even values to avoid time drift
             frame_time = cap.get(cv2.CAP_PROP_POS_MSEC) + \
