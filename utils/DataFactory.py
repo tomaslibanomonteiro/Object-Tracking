@@ -14,10 +14,11 @@ class PersonTime:
 
 
 ## @defgroup group1 DataFactory
-#  Methods of Data Factory
+#  Several methods for reading and processing the input data from
+#  a video and its corresponding sensor data output
 #  @{
 
-## @brief imports mp4 from path for further processing
+## @brief Imports mp4 from path for further processing
 # @param path to mp4 file
 # @return video as cv2VideoCapture - None on error
 def loadInputVideoFromPath(path):
@@ -34,7 +35,7 @@ def loadInputVideoFromPath(path):
     return vid_input
 
 
-## @brief import csv from path for further processing
+## @brief Imports csv from path for further processing
 # @param path to csv file
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
 # @return input csv as list
@@ -78,14 +79,20 @@ def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
     df.loc[:, useful_columns].to_csv(path)
 
 
-## @brief creates small stack of array from input video
-# @param cap input video capture
-# @param start_frame frame number of cap to start with
-# @param in_fps fps of input cap
-# @param out_fps target fps of array
-# @param num_frames target frame number of array
-# @param rescale rescale dimensio (x,y) if needed
-# @return times of frames within stack, video stack of np arrays
+## @brief Creates small stack of array from input video
+#
+# This function takes the video cap as input reads several frames
+# downsamples and rescales the frames if applied and converts 
+# the frame to grayscale. The output of this function is a stack of np.arrays
+# which contnains the read frames as well as the corresponding times beginning
+# from the start of the video.
+# @param cap input video capture.
+# @param start_frame frame number of cap to start with.
+# @param in_fps fps of input cap.
+# @param out_fps target fps of array.
+# @param num_frames target frame number of array.
+# @param rescale rescale dimensio (x,y) if needed.
+# @return times, video - times of frames within stack, video stack of np arrays.
 def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale):
     frames = []
     frame_times = []
@@ -113,10 +120,10 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
     return times, video
 
 
-## @brief get corresponding data of input times 
-# @param df_csv dataframe csv with sensor output
-# @param relevant_times times
-# @return sub_csv subset of input frame only containing relevant times
+## @brief Get corresponding data of input times 
+# @param df_csv dataframe csv with sensor output.
+# @param relevant_times times at which to extract sensor data.
+# @return sub_csv subset of input frame only containing relevant times.
 def downsampleCSV(df_csv, relvant_times):
     sub_csv = []
     for time in relvant_times:
@@ -128,7 +135,7 @@ def downsampleCSV(df_csv, relvant_times):
     return sub_csv
 
 
-## @brief get corresponding sensor data of csv for input time
+## @brief Get corresponding sensor data of csv for input time
 # @param df_csv dataframe csv with sensor output
 # @param time time of frame 
 # @return sensor_data subset df of sensor data from frame
@@ -142,7 +149,7 @@ def getSensordataForFrame(df_csv, time):
     return sensor_data
 
 
-## @brief creates small stack of array from input video 
+## @brief Creates small stack of array from input video 
 # @param cap input video capture
 # @param start_frame frame number of cap to start with
 # @param out_fps target fps of array
