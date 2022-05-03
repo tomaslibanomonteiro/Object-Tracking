@@ -69,3 +69,8 @@ $ python demo_background_removal.py --input data/videos/20220301-1638-214.mp4 --
 ```
 
 </details>
+
+<details open>
+<summary>Report Bug</summary>
+1. Can not load simple csv file.
+</details>

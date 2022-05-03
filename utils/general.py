@@ -29,3 +29,27 @@ def colorstr(*input):
 def print_args(name, opt):
     # Print argparser arguments
     print(colorstr(f'{name}: ') + ', '.join(f'{k}={v}' for k, v in vars(opt).items()))
+
+
+def neighbor(i,j,M,N):
+	#find correct neighbors
+	if i==0 and j==0:
+		neighbor=[(0,1), (1,0)]
+	elif i==0 and j==N-1:
+		neighbor=[(0,N-2), (1,N-1)]
+	elif i==M-1 and j==0:
+		neighbor=[(M-1,1), (M-2,0)]
+	elif i==M-1 and j==N-1:
+		neighbor=[(M-1,N-2), (M-2,N-1)]
+	elif i==0:
+		neighbor=[(0,j-1), (0,j+1), (1,j)]
+	elif i==M-1:
+		neighbor=[(M-1,j-1), (M-1,j+1), (M-2,j)]
+	elif j==0:
+		neighbor=[(i-1,0), (i+1,0), (i,1)]
+	elif j==N-1:
+		neighbor=[(i-1,N-1), (i+1,N-1), (i,N-2)]
+	else:
+		neighbor=[(i-1,j), (i+1,j), (i,j-1), (i,j+1),\
+				  (i-1,j-1), (i-1,j+1), (i+1,j-1), (i+1,j+1)]
+	return neighbor
