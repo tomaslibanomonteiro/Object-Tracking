@@ -127,7 +127,7 @@ def downsampleCSV(df_csv, relvant_times):
     sub_df = pd.concat(sub_csv, axis=0, ignore_index=True)
     set_ts = set(sub_df['ts in ms'])
     print("Rows in sub df: ", len(sub_df))
-    return sub_csv
+    return sub_df
 
 
 ## @brief Get corresponding sensor data of csv for input time
@@ -150,6 +150,7 @@ def getSensordataForFrame(df_csv, time):
 # @param out_fps target fps of array
 # @param num_frames target frame number of array
 # @param rescale rescale dimensio (x,y) if needed
+# @return cut_csv, cut_cap -  df of only relevant times, video stack of np arrays.
 def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale=(480, 270)):
     in_fps = int(cap.get(5))
     csv_start_time = df_csv.at[1, 'ts in ms']
@@ -157,12 +158,13 @@ def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale
         cap, start_frame, in_fps, out_fps, num_frames, rescale)
     times += csv_start_time
     cut_csv = downsampleCSV(df_csv, times)
+    return cut_csv, cut_cap
 
 ## @} */ // end of Data Factory
 
 # vcap = loadInputVideoFromPath("./data/20220301-1638-214.mp4")
-print("Read Csv")
-csv = loadInputCsvFromPath("./data/2022-03-07_14-07-22_positions-15.csv")
-print("Done")
+# print("Read Csv")
+# csv = loadInputCsvFromPath("./data/2022-03-07_14-07-22_positions-15.csv")
+# print("Done")
 # test = downsampleInput(vcap, csv, 0)
 
