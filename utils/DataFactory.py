@@ -5,14 +5,6 @@ import os
 
 
 
-class PersonTime:
-    def __init__(self, time_id, person_id, x_coord, y_coord):
-        self.time_id = time_id
-        self.person_id = person_id
-        self.x_coord = x_coord
-        self.y_coord = y_coord
-
-
 ## @defgroup group1 DataFactory
 #  Several methods for reading and processing the input data from
 #  a video and its corresponding sensor data output
@@ -49,15 +41,6 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
                      quoting=3,
                      on_bad_lines='skip',
                      encoding='utf-8')
-        # people_times = []
-    # for row_idx in df.index:
-    #     person_time = PersonTime(
-    #         df['ts in ms'][row_idx],
-    #         df['mapped id'][row_idx],
-    #         df['x in m'][row_idx],
-    #         df['y in m'][row_idx])
-    #     people_times.append(person_time)
-    
     return df
 
 
