@@ -40,9 +40,16 @@ def loadInputVideoFromPath(path):
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
 # @return input csv as list
 def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
-    df = pd.read_csv(path, sep=';', header=0,
-                     skipinitialspace=True, usecols=fields)
-    # people_times = []
+    df = pd.read_csv(path, 
+                     sep=';', 
+                     header=0,
+                     skipinitialspace=True, 
+                     usecols=fields, 
+                     engine='c', 
+                     quoting=3,
+                     on_bad_lines='skip',
+                     encoding='utf-8')
+        # people_times = []
     # for row_idx in df.index:
     #     person_time = PersonTime(
     #         df['ts in ms'][row_idx],
@@ -50,7 +57,7 @@ def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
     #         df['x in m'][row_idx],
     #         df['y in m'][row_idx])
     #     people_times.append(person_time)
-
+    
     return df
 
 
@@ -65,9 +72,14 @@ def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 
     chunksize = 1000000
     df = pd.DataFrame()
-    for chunk in (pd.read_csv(path,sep=';',header=0,skipinitialspace=True, 
-                            usecols=fields,engine='python',quoting=3,
-                          chunksize=chunksize)):
+    for chunk in (pd.read_csv(path,
+                            sep=';',
+                            header=0,
+                            skipinitialspace=True, 
+                            usecols=fields,
+                            engine='c',
+                            quoting=3,
+                            chunksize=chunksize)):
         df = pd.concat([df, chunk], ignore_index=True)
 
     file_name = os.path.basename(path) 
@@ -166,6 +178,8 @@ def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale
 ## @} */ // end of Data Factory
 
 # vcap = loadInputVideoFromPath("./data/20220301-1638-214.mp4")
-# csv = loadInputCsvFromPath("./data/2022-03-01_17-38_positions-7.csv")
+print("Read Csv")
+csv = loadInputCsvFromPath("./data/2022-03-07_14-07-22_positions-15.csv")
+print("Done")
 # test = downsampleInput(vcap, csv, 0)
 
