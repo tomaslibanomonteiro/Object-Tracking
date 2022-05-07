@@ -2,7 +2,7 @@
 
 Find each player's x&y postion in the playground from given videos.
 
-## <div align="center">Quick Start Examples</div>
+## <div align="center">Installation and Execution</div>
 
 <details open>
 <summary>Install</summary>
