@@ -117,7 +117,7 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
 
 ## @brief Get corresponding data of input times 
 # @param df_csv dataframe csv with sensor output.
-# @param relevant_times times at which to extract sensor data.
+# @param relvant_times times at which to extract sensor data.
 # @returns sub_csv subset of input frame only containing relevant times.
 def downsampleCSV(df_csv, relvant_times):
     sub_csv = []
@@ -146,6 +146,7 @@ def getSensordataForFrame(df_csv, time):
 
 ## @brief Creates small stack of array from input video 
 # @param cap input video capture
+# @param df_csv input df of sensor data
 # @param start_frame frame number of cap to start with
 # @param out_fps target fps of array
 # @param num_frames target frame number of array
