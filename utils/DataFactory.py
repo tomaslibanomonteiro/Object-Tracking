@@ -3,7 +3,7 @@ import pandas as pd
 import cv2
 import os
 
-
+TIME_OFFSET_MS = 70500 #ms 1:11min offset
 
 ## @defgroup group1 DataFactory
 #  Several methods for reading and processing the input data from
@@ -12,7 +12,7 @@ import os
 
 ## @brief Imports mp4 from path for further processing
 # @param path to mp4 file
-# @return video as cv2VideoCapture - None on error
+# @returns video as cv2VideoCapture - None on error
 def loadInputVideoFromPath(path):
     vid_input = cv2.VideoCapture(path)
     if (vid_input.isOpened() == False):
@@ -30,7 +30,7 @@ def loadInputVideoFromPath(path):
 ## @brief Imports csv from path for further processing
 # @param path to csv file
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
-# @return input csv as list
+# @returns input csv as list
 def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
     df = pd.read_csv(path, 
                      sep=';', 
@@ -87,7 +87,7 @@ def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 # @param out_fps target fps of array.
 # @param num_frames target frame number of array.
 # @param rescale rescale dimensio (x,y) if needed.
-# @return times, video - times of frames within stack, video stack of np arrays.
+# @returns times, video - times of frames within stack, video stack of np arrays.
 def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale):
     frames = []
     frame_times = []
@@ -96,7 +96,7 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
     end_frame = start_frame + num_frames * int(in_fps/out_fps)
 
     while ret and frame_number < end_frame:
-        cap.set(cv2.CAP_PROP_FRAME_COUNT, frame_number-1)
+        cap.set(cv2.CAP_PROP_POS_FRAMES, frame_number-1)
         ret, frame = cap.read()
         # read one frame from the 'capture' object; img is (H, W, C)
         if ret:
@@ -118,7 +118,7 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
 ## @brief Get corresponding data of input times 
 # @param df_csv dataframe csv with sensor output.
 # @param relevant_times times at which to extract sensor data.
-# @return sub_csv subset of input frame only containing relevant times.
+# @returns sub_csv subset of input frame only containing relevant times.
 def downsampleCSV(df_csv, relvant_times):
     sub_csv = []
     for time in relvant_times:
@@ -133,7 +133,7 @@ def downsampleCSV(df_csv, relvant_times):
 ## @brief Get corresponding sensor data of csv for input time
 # @param df_csv dataframe csv with sensor output
 # @param time time of frame 
-# @return sensor_data subset df of sensor data from frame
+# @returns sensor_data subset df of sensor data from frame
 def getSensordataForFrame(df_csv, time):
     sensor_data = None
     for tolerance in range(-3, 4):
@@ -150,15 +150,19 @@ def getSensordataForFrame(df_csv, time):
 # @param out_fps target fps of array
 # @param num_frames target frame number of array
 # @param rescale rescale dimensio (x,y) if needed
-# @return cut_csv, cut_cap -  df of only relevant times, video stack of np arrays.
+# @returns cut_csv, cut_cap -  df of only relevant times, video stack of np arrays.
 def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale=(480, 270)):
     in_fps = int(cap.get(5))
     csv_start_time = df_csv.at[1, 'ts in ms']
-    times, cut_cap = videoCaptureToNpArray(
-        cap, start_frame, in_fps, out_fps, num_frames, rescale)
-    times += csv_start_time
-    cut_csv = downsampleCSV(df_csv, times)
-    return cut_csv, cut_cap
+    times, cut_cap = videoCaptureToNpArray(cap, 
+                                           start_frame, 
+                                           in_fps, 
+                                           out_fps, 
+                                           num_frames, 
+                                           rescale)
+    times += csv_start_time - TIME_OFFSET_MS
+    #cut_csv = downsampleCSV(df_csv, times)
+    return df_csv, cut_cap, times
 
 ## @} */ // end of Data Factory
 
