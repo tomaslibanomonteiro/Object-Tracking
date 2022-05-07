@@ -56,18 +56,25 @@ $ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/da
 <summary>Datasets</summary>
 
 Click links to download [videos files](https://drive.google.com/file/d/1OrTUqcDlupKqz20r5teMnfLvFnvhVqgP/view?usp=sharing) and [object position csv files](https://drive.google.com/file/d/1onGxXwf2NFWHsZsSpvAMHjWAlqfKKUKJ/view?usp=sharing) from google drive.
+[Here](https://drive.google.com/file/d/152wThRrr2ujar-yxuPtvFmnr6C8P5Y0V/view?usp=sharing) is the input video already with no background
 
 
 </details>
 <details open>
-<summary>Run demo of background removal</summary>
+<summary>Run background removal</summary>
 
-There are two slected algorithms: 'KNN', 'MOG2'
+In folder "background_removal", run:
 
 ```bash
-$ python demo_background_removal.py --input data/videos/20220301-1638-214.mp4 --algo 'MOG2'
+$ python background_removal.py --input FILE_PATH_TO_VIDEO --algo ALGORITHM_NAME
 ```
+FILE_PATH_TO_VIDEO: usually, this is the video that we want to remove background: data/videos/20220307-1307-214.mp4
+ALGORITHM_NAME: 'KNN' or 'MOG2'  
 
+It will output: no_background.mp4
+  
+In the code, you can change some options regarding the background removal process
+  
 </details>
 
 <details open>
