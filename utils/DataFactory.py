@@ -5,14 +5,6 @@ import os
 
 
 
-class PersonTime:
-    def __init__(self, time_id, person_id, x_coord, y_coord):
-        self.time_id = time_id
-        self.person_id = person_id
-        self.x_coord = x_coord
-        self.y_coord = y_coord
-
-
 ## @defgroup group1 DataFactory
 #  Several methods for reading and processing the input data from
 #  a video and its corresponding sensor data output
@@ -40,17 +32,15 @@ def loadInputVideoFromPath(path):
 # @param fields to be importet from csv, default:['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']
 # @return input csv as list
 def loadInputCsvFromPath(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in m', 'direction of movement in deg']):
-    df = pd.read_csv(path, sep=';', header=0,
-                     skipinitialspace=True, usecols=fields)
-    # people_times = []
-    # for row_idx in df.index:
-    #     person_time = PersonTime(
-    #         df['ts in ms'][row_idx],
-    #         df['mapped id'][row_idx],
-    #         df['x in m'][row_idx],
-    #         df['y in m'][row_idx])
-    #     people_times.append(person_time)
-
+    df = pd.read_csv(path, 
+                     sep=';', 
+                     header=0,
+                     skipinitialspace=True, 
+                     usecols=fields, 
+                     engine='c', 
+                     quoting=3,
+                     on_bad_lines='skip',
+                     encoding='utf-8')
     return df
 
 
@@ -65,9 +55,14 @@ def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 
     chunksize = 1000000
     df = pd.DataFrame()
-    for chunk in (pd.read_csv(path,sep=';',header=0,skipinitialspace=True, 
-                            usecols=fields,engine='python',quoting=3,
-                          chunksize=chunksize)):
+    for chunk in (pd.read_csv(path,
+                            sep=';',
+                            header=0,
+                            skipinitialspace=True, 
+                            usecols=fields,
+                            engine='c',
+                            quoting=3,
+                            chunksize=chunksize)):
         df = pd.concat([df, chunk], ignore_index=True)
 
     file_name = os.path.basename(path) 
@@ -132,7 +127,7 @@ def downsampleCSV(df_csv, relvant_times):
     sub_df = pd.concat(sub_csv, axis=0, ignore_index=True)
     set_ts = set(sub_df['ts in ms'])
     print("Rows in sub df: ", len(sub_df))
-    return sub_csv
+    return sub_df
 
 
 ## @brief Get corresponding sensor data of csv for input time
@@ -155,6 +150,7 @@ def getSensordataForFrame(df_csv, time):
 # @param out_fps target fps of array
 # @param num_frames target frame number of array
 # @param rescale rescale dimensio (x,y) if needed
+# @return cut_csv, cut_cap -  df of only relevant times, video stack of np arrays.
 def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale=(480, 270)):
     in_fps = int(cap.get(5))
     csv_start_time = df_csv.at[1, 'ts in ms']
@@ -162,10 +158,13 @@ def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale
         cap, start_frame, in_fps, out_fps, num_frames, rescale)
     times += csv_start_time
     cut_csv = downsampleCSV(df_csv, times)
+    return cut_csv, cut_cap
 
 ## @} */ // end of Data Factory
 
 # vcap = loadInputVideoFromPath("./data/20220301-1638-214.mp4")
-# csv = loadInputCsvFromPath("./data/2022-03-01_17-38_positions-7.csv")
+# print("Read Csv")
+# csv = loadInputCsvFromPath("./data/2022-03-07_14-07-22_positions-15.csv")
+# print("Done")
 # test = downsampleInput(vcap, csv, 0)
 
