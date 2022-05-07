@@ -75,6 +75,11 @@ $ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/da
 
 </details>
 
+## <div align="center">Documentation</div>
+
+The Doxygen documentation can be found in the following link: [Documentation](https://tomaslibanomonteiro.github.io/Object-Tracking/index.html)
+
+
 ## <div align="center">Steps Taken </div>
 
 In order to accomplish our objectives, the project was divided in the following tasks:
