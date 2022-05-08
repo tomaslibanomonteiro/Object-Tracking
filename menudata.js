@@ -27,4 +27,7 @@ var menudata={children:[
 {text:"Related Pages",url:"pages.html"},
 {text:"Modules",url:"modules.html"},
 {text:"Packages",url:"namespaces.html",children:[
-{text:"Packages",url:"namespaces.html"}]}]}
+{text:"Packages",url:"namespaces.html"},
+{text:"Package Functions",url:"namespacemembers.html",children:[
+{text:"All",url:"namespacemembers.html"},
+{text:"Functions",url:"namespacemembers_func.html"}]}]}]}
