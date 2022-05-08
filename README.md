@@ -100,7 +100,7 @@ $ python background_removal.py --input FILE_PATH_TO_VIDEO --algo ALGORITHM_NAME
 **FILE_PATH_TO_VIDEO**: usually, this is the video that we want to remove background: data/videos/20220307-1307-214.mp4
 ALGORITHM_NAME: 'KNN' or 'MOG2'
 
-**Output**: no_background.mp4
+**Output**: video with the foreground of the one given as input
 
 <!-- In the code, you can change some options regarding the background removal process -->
 
