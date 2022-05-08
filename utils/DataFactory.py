@@ -82,6 +82,7 @@ def transformToSimpleCSV(path, fields=['ts in ms', 'mapped id', 'x in m', 'y in 
 # the frame to grayscale. The output of this function is a stack of np.arrays
 # which contnains the read frames as well as the corresponding times beginning
 # from the start of the video.
+#
 # @param cap input video capture.
 # @param start_frame frame number of cap to start with.
 # @param in_fps fps of input cap.
@@ -119,7 +120,7 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
 ## @brief Get corresponding sensor data of csv for input time
 # @param df_csv dataframe csv with sensor output
 # @param time time of frame 
-# @returns sensor_data subset df of sensor data from frame
+# @returns sensor_data subset df of sensor data from frame at time
 def getSensordataForFrame(df_csv, time):
     sensor_data = None
     for tolerance in range(-3, 4):
@@ -130,9 +131,15 @@ def getSensordataForFrame(df_csv, time):
     return sensor_data
 
 
-#Precision is 0.1 m
+## @brief Calculates y and x positions from sensor data
+#
+# Precision is 0.1 m
 # get y,x position for all players from sensor data
 # sensor data is from function getSensordataForFrame
+#
+# @param sensor_data to extract player positions
+# @param out_size desired size of output
+# @returns list of y and x for all players from sensor data
 def getPositionsFromSensorData(sensor_data, out_size):
     W, H = out_size
     position =[]
@@ -163,6 +170,11 @@ def getPositionsFromSensorData(sensor_data, out_size):
     return position
 
 
+## @brief Creates image frame from positions
+#
+# @param positions list of calculated (y, x) player positions
+# @param out_size desired size of output
+# @returns frame with player position value 255
 def generateImageFromSensorPositions(positions, out_size):
     W,H = out_size
     field = np.zeros((H,W),np.uint8)
@@ -176,6 +188,21 @@ def generateImageFromSensorPositions(positions, out_size):
     return field
 
 
+## @brief Generates stack of frames and corresponding player map for training data
+#
+# This function takes the video cap as input reads several frames
+# downsamples and rescales the frames if applied and converts 
+# the frame to grayscale. The output of this function is a stack of np.arrays
+# which contnains the read frames as well as the corresponding times beginning
+# from the start of the video.
+#
+# @param cap input video capture.
+# @param df dataframe of sensor data
+# @param start_frame frame number to start with.
+# @param out_fps target fps of stack.
+# @param stack_size target size of output stack.
+# @param data_size target size of data (W,H).
+# @returns train_data, train_result - frame stack of video, frame stack of sensor maps.
 def generateTrainingSamples(cap, df, start_frame, out_fps=25, stack_size=500, data_size=(420, 200)):
     fps = int(cap.get(5))
     train_data, times = videoCaptureToNpArray(cap, 
