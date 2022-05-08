@@ -63,123 +63,22 @@ Functions</h2></td></tr>
 <tr class="memitem:ga5f966b36e39d0679199c2e8c8e73d6dd"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group1.html#ga5f966b36e39d0679199c2e8c8e73d6dd">utils.DataFactory.videoCaptureToNpArray</a> (cap, start_frame, in_fps, out_fps, num_frames, rescale)</td></tr>
 <tr class="memdesc:ga5f966b36e39d0679199c2e8c8e73d6dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates small stack of array from input video.  <a href="group__group1.html#ga5f966b36e39d0679199c2e8c8e73d6dd">More...</a><br /></td></tr>
 <tr class="separator:ga5f966b36e39d0679199c2e8c8e73d6dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga14751d4581e2e69712a249bda9833772"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group1.html#ga14751d4581e2e69712a249bda9833772">utils.DataFactory.downsampleCSV</a> (df_csv, relvant_times)</td></tr>
-<tr class="memdesc:ga14751d4581e2e69712a249bda9833772"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get corresponding data of input times.  <a href="group__group1.html#ga14751d4581e2e69712a249bda9833772">More...</a><br /></td></tr>
-<tr class="separator:ga14751d4581e2e69712a249bda9833772"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga358534b315c60aaed3421950ccd6a802"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group1.html#ga358534b315c60aaed3421950ccd6a802">utils.DataFactory.getSensordataForFrame</a> (df_csv, time)</td></tr>
 <tr class="memdesc:ga358534b315c60aaed3421950ccd6a802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get corresponding sensor data of csv for input time.  <a href="group__group1.html#ga358534b315c60aaed3421950ccd6a802">More...</a><br /></td></tr>
 <tr class="separator:ga358534b315c60aaed3421950ccd6a802"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7fe0240143fefe5b9f0d706da73ccc5e"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group1.html#ga7fe0240143fefe5b9f0d706da73ccc5e">utils.DataFactory.downsampleInput</a> (cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale=(480, 270))</td></tr>
-<tr class="memdesc:ga7fe0240143fefe5b9f0d706da73ccc5e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates small stack of array from input video.  <a href="group__group1.html#ga7fe0240143fefe5b9f0d706da73ccc5e">More...</a><br /></td></tr>
-<tr class="separator:ga7fe0240143fefe5b9f0d706da73ccc5e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gace882e1179964cdd0ed8b06610b6c494"><td class="memItemLeft" align="right" valign="top"><a id="gace882e1179964cdd0ed8b06610b6c494" name="gace882e1179964cdd0ed8b06610b6c494"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>utils.DataFactory.getPositionsFromSensorData</b> (sensor_data, out_size)</td></tr>
+<tr class="separator:gace882e1179964cdd0ed8b06610b6c494"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga5bfd6fde412e4232b066dca152ce72bb"><td class="memItemLeft" align="right" valign="top"><a id="ga5bfd6fde412e4232b066dca152ce72bb" name="ga5bfd6fde412e4232b066dca152ce72bb"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>utils.DataFactory.generateImageFromSensorPositions</b> (positions, out_size)</td></tr>
+<tr class="separator:ga5bfd6fde412e4232b066dca152ce72bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga4af02fa998de03e29fbd248e8b572435"><td class="memItemLeft" align="right" valign="top"><a id="ga4af02fa998de03e29fbd248e8b572435" name="ga4af02fa998de03e29fbd248e8b572435"></a>
+def&#160;</td><td class="memItemRight" valign="bottom"><b>utils.DataFactory.generateTrainingSamples</b> (cap, df, start_frame, out_fps=25, stack_size=500, data_size=(420, 200))</td></tr>
+<tr class="separator:ga4af02fa998de03e29fbd248e8b572435"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >Several methods for reading and processing the input data from a video and its corresponding sensor data output. </p>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="ga14751d4581e2e69712a249bda9833772" name="ga14751d4581e2e69712a249bda9833772"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga14751d4581e2e69712a249bda9833772">&#9670;&nbsp;</a></span>downsampleCSV()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def utils.DataFactory.downsampleCSV </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>df_csv</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>relvant_times</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Get corresponding data of input times. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">df_csv</td><td>dataframe csv with sensor output. </td></tr>
-    <tr><td class="paramname">relvant_times</td><td>times at which to extract sensor data. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>sub_csv subset of input frame only containing relevant times. </dd></dl>
-
-</div>
-</div>
-<a id="ga7fe0240143fefe5b9f0d706da73ccc5e" name="ga7fe0240143fefe5b9f0d706da73ccc5e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7fe0240143fefe5b9f0d706da73ccc5e">&#9670;&nbsp;</a></span>downsampleInput()</h2>
-
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">def utils.DataFactory.downsampleInput </td>
-          <td>(</td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>cap</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>df_csv</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>start_frame</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>out_fps</em> = <code>1</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>num_frames</em> = <code>100</code>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">&#160;</td>
-          <td class="paramname"><em>rescale</em> = <code>(480,&#160;270)</code>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Creates small stack of array from input video. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">cap</td><td>input video capture </td></tr>
-    <tr><td class="paramname">df_csv</td><td>input df of sensor data </td></tr>
-    <tr><td class="paramname">start_frame</td><td>frame number of cap to start with </td></tr>
-    <tr><td class="paramname">out_fps</td><td>target fps of array </td></tr>
-    <tr><td class="paramname">num_frames</td><td>target frame number of array </td></tr>
-    <tr><td class="paramname">rescale</td><td>rescale dimensio (x,y) if needed </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>cut_csv, cut_cap - df of only relevant times, video stack of np arrays. </dd></dl>
-
-</div>
-</div>
 <a id="ga358534b315c60aaed3421950ccd6a802" name="ga358534b315c60aaed3421950ccd6a802"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga358534b315c60aaed3421950ccd6a802">&#9670;&nbsp;</a></span>getSensordataForFrame()</h2>
 
