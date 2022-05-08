@@ -7,6 +7,10 @@ from numpy.lib.polynomial import poly
 import random 
 
 
+## @defgroup group2 Player Counter
+#  Several methods to calculate the number ofo players within the images
+#  @{
+
 
 ## @brief finds number of players in a frame 
 # @param vidcap videofile
@@ -43,4 +47,4 @@ def mainFunc(video):
     vidcap = cv2.VideoCapture(video)
     return numberOfPlayersInVideo(vidcap)
 
-
+## @} */ // end of Data Factory
