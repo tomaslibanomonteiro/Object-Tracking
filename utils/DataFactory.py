@@ -2,6 +2,7 @@ import numpy as np
 import pandas as pd
 import cv2
 import os
+from utils.general import neighbor
 
 TIME_OFFSET_MS = 70500 #ms 1:11min offset
 
@@ -112,22 +113,7 @@ def videoCaptureToNpArray(cap, start_frame, in_fps, out_fps, num_frames, rescale
         frame_number += int(in_fps/out_fps)
     video = np.stack(frames, axis=0)  # dimensions (T, H, W, C)
     times = np.array(frame_times)
-    return times, video
-
-
-## @brief Get corresponding data of input times 
-# @param df_csv dataframe csv with sensor output.
-# @param relvant_times times at which to extract sensor data.
-# @returns sub_csv subset of input frame only containing relevant times.
-def downsampleCSV(df_csv, relvant_times):
-    sub_csv = []
-    for time in relvant_times:
-        df_sensor = getSensordataForFrame(df_csv, time)
-        sub_csv.append(df_sensor)
-    sub_df = pd.concat(sub_csv, axis=0, ignore_index=True)
-    set_ts = set(sub_df['ts in ms'])
-    print("Rows in sub df: ", len(sub_df))
-    return sub_df
+    return video, times
 
 
 ## @brief Get corresponding sensor data of csv for input time
@@ -144,26 +130,82 @@ def getSensordataForFrame(df_csv, time):
     return sensor_data
 
 
-## @brief Creates small stack of array from input video 
-# @param cap input video capture
-# @param df_csv input df of sensor data
-# @param start_frame frame number of cap to start with
-# @param out_fps target fps of array
-# @param num_frames target frame number of array
-# @param rescale rescale dimensio (x,y) if needed
-# @returns cut_csv, cut_cap -  df of only relevant times, video stack of np arrays.
-def downsampleInput(cap, df_csv, start_frame, out_fps=1, num_frames=100, rescale=(480, 270)):
-    in_fps = int(cap.get(5))
-    csv_start_time = df_csv.at[1, 'ts in ms']
-    times, cut_cap = videoCaptureToNpArray(cap, 
-                                           start_frame, 
-                                           in_fps, 
-                                           out_fps, 
-                                           num_frames, 
-                                           rescale)
+#Precision is 0.1 m
+# get y,x position for all players from sensor data
+# sensor data is from function getSensordataForFrame
+def getPositionsFromSensorData(sensor_data, out_size):
+    W, H = out_size
+    position =[]
+    for i in range(len(sensor_data)):
+        x = sensor_data.iloc[i]['x in m']
+        y = sensor_data.iloc[i]['y in m']
+        if np.isnan(x) == False and np.isnan(y) == False:
+            if x >= 21:
+                x=21
+            elif x<= -21:
+                x=-21
+
+            if y >=10:
+                y=10
+            elif y<= -10:
+                y =-10
+            
+            x = int((round((x + 21),2) * 10))
+            y = int((round((-(y-10)),2) * 10))
+
+            # Aviod x and y out of boundary(index)
+            if x == W:
+                x -= 1
+            if y == H:
+                y -= 1
+            position.append((y,x))
+
+    return position
+
+
+def generateImageFromSensorPositions(positions, out_size):
+    W,H = out_size
+    field = np.zeros((H,W),np.uint8)
+    for j in range(len(positions)):
+
+        # For a better visualization, also set neighbors are 255
+        index = neighbor(positions[j][0],positions[j][1],H,W)
+        for k in index:
+            field[k] = 255
+            field[positions[j]] = 255
+    return field
+
+
+def generateTrainingSamples(cap, df, start_frame, out_fps=25, stack_size=500, data_size=(420, 200)):
+    fps = int(cap.get(5))
+    train_data, times = videoCaptureToNpArray(cap, 
+                                            start_frame, 
+                                            in_fps=fps, 
+                                            out_fps=out_fps, 
+                                            num_frames=stack_size, 
+                                            rescale=data_size) 
+    
+    
+    # apply time ofset of sensor data
+    csv_start_time = df.at[1, 'ts in ms']
     times += csv_start_time - TIME_OFFSET_MS
-    #cut_csv = downsampleCSV(df_csv, times)
-    return df_csv, cut_cap, times
+    
+    print("Generate training stack from sensor data")
+    fields = []
+    for i in times:
+        # Get sensor_data from given dataframe and time_stamp
+        sensor_data = getSensordataForFrame(df,i)
+        
+        # Skip NAN data
+        assert not sensor_data.empty, f"Frame choosen without corresponding sensor input"
+        position = getPositionsFromSensorData(sensor_data, data_size)
+        field = generateImageFromSensorPositions(position, data_size)
+        fields.append(field)
+    train_result = np.stack(fields, axis=0)  # dimensions (T, H, W)       
+    
+    assert train_data.size == train_result.size, f"Train data size missmatch"
+    
+    return train_data, train_result
 
 ## @} */ // end of Data Factory
 
