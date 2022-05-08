@@ -66,19 +66,163 @@ Functions</h2></td></tr>
 <tr class="memitem:ga358534b315c60aaed3421950ccd6a802"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group1.html#ga358534b315c60aaed3421950ccd6a802">utils.DataFactory.getSensordataForFrame</a> (df_csv, time)</td></tr>
 <tr class="memdesc:ga358534b315c60aaed3421950ccd6a802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Get corresponding sensor data of csv for input time.  <a href="group__group1.html#ga358534b315c60aaed3421950ccd6a802">More...</a><br /></td></tr>
 <tr class="separator:ga358534b315c60aaed3421950ccd6a802"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gace882e1179964cdd0ed8b06610b6c494"><td class="memItemLeft" align="right" valign="top"><a id="gace882e1179964cdd0ed8b06610b6c494" name="gace882e1179964cdd0ed8b06610b6c494"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>utils.DataFactory.getPositionsFromSensorData</b> (sensor_data, out_size)</td></tr>
+<tr class="memitem:gace882e1179964cdd0ed8b06610b6c494"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group1.html#gace882e1179964cdd0ed8b06610b6c494">utils.DataFactory.getPositionsFromSensorData</a> (sensor_data, out_size)</td></tr>
+<tr class="memdesc:gace882e1179964cdd0ed8b06610b6c494"><td class="mdescLeft">&#160;</td><td class="mdescRight">Calculates y and x positions from sensor data.  <a href="group__group1.html#gace882e1179964cdd0ed8b06610b6c494">More...</a><br /></td></tr>
 <tr class="separator:gace882e1179964cdd0ed8b06610b6c494"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5bfd6fde412e4232b066dca152ce72bb"><td class="memItemLeft" align="right" valign="top"><a id="ga5bfd6fde412e4232b066dca152ce72bb" name="ga5bfd6fde412e4232b066dca152ce72bb"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>utils.DataFactory.generateImageFromSensorPositions</b> (positions, out_size)</td></tr>
+<tr class="memitem:ga5bfd6fde412e4232b066dca152ce72bb"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group1.html#ga5bfd6fde412e4232b066dca152ce72bb">utils.DataFactory.generateImageFromSensorPositions</a> (positions, out_size)</td></tr>
+<tr class="memdesc:ga5bfd6fde412e4232b066dca152ce72bb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates image frame from positions.  <a href="group__group1.html#ga5bfd6fde412e4232b066dca152ce72bb">More...</a><br /></td></tr>
 <tr class="separator:ga5bfd6fde412e4232b066dca152ce72bb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4af02fa998de03e29fbd248e8b572435"><td class="memItemLeft" align="right" valign="top"><a id="ga4af02fa998de03e29fbd248e8b572435" name="ga4af02fa998de03e29fbd248e8b572435"></a>
-def&#160;</td><td class="memItemRight" valign="bottom"><b>utils.DataFactory.generateTrainingSamples</b> (cap, df, start_frame, out_fps=25, stack_size=500, data_size=(420, 200))</td></tr>
+<tr class="memitem:ga4af02fa998de03e29fbd248e8b572435"><td class="memItemLeft" align="right" valign="top">def&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__group1.html#ga4af02fa998de03e29fbd248e8b572435">utils.DataFactory.generateTrainingSamples</a> (cap, df, start_frame, out_fps=25, stack_size=500, data_size=(420, 200))</td></tr>
+<tr class="memdesc:ga4af02fa998de03e29fbd248e8b572435"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generates stack of frames and corresponding player map for training data.  <a href="group__group1.html#ga4af02fa998de03e29fbd248e8b572435">More...</a><br /></td></tr>
 <tr class="separator:ga4af02fa998de03e29fbd248e8b572435"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <p >Several methods for reading and processing the input data from a video and its corresponding sensor data output. </p>
 <h2 class="groupheader">Function Documentation</h2>
+<a id="ga5bfd6fde412e4232b066dca152ce72bb" name="ga5bfd6fde412e4232b066dca152ce72bb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5bfd6fde412e4232b066dca152ce72bb">&#9670;&nbsp;</a></span>generateImageFromSensorPositions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def utils.DataFactory.generateImageFromSensorPositions </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>positions</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>out_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Creates image frame from positions. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">positions</td><td>list of calculated (y, x) player positions </td></tr>
+    <tr><td class="paramname">out_size</td><td>desired size of output </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>frame with player position value 255 </dd></dl>
+
+</div>
+</div>
+<a id="ga4af02fa998de03e29fbd248e8b572435" name="ga4af02fa998de03e29fbd248e8b572435"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4af02fa998de03e29fbd248e8b572435">&#9670;&nbsp;</a></span>generateTrainingSamples()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def utils.DataFactory.generateTrainingSamples </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>cap</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>df</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>start_frame</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>out_fps</em> = <code>25</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>stack_size</em> = <code>500</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>data_size</em> = <code>(420,&#160;200)</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Generates stack of frames and corresponding player map for training data. </p>
+<p >This function takes the video cap as input reads several frames downsamples and rescales the frames if applied and converts the frame to grayscale. The output of this function is a stack of np.arrays which contnains the read frames as well as the corresponding times beginning from the start of the video.</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">cap</td><td>input video capture. </td></tr>
+    <tr><td class="paramname">df</td><td>dataframe of sensor data </td></tr>
+    <tr><td class="paramname">start_frame</td><td>frame number to start with. </td></tr>
+    <tr><td class="paramname">out_fps</td><td>target fps of stack. </td></tr>
+    <tr><td class="paramname">stack_size</td><td>target size of output stack. </td></tr>
+    <tr><td class="paramname">data_size</td><td>target size of data (W,H). </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>train_data, train_result - frame stack of video, frame stack of sensor maps. </dd></dl>
+
+</div>
+</div>
+<a id="gace882e1179964cdd0ed8b06610b6c494" name="gace882e1179964cdd0ed8b06610b6c494"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gace882e1179964cdd0ed8b06610b6c494">&#9670;&nbsp;</a></span>getPositionsFromSensorData()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">def utils.DataFactory.getPositionsFromSensorData </td>
+          <td>(</td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>sensor_data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">&#160;</td>
+          <td class="paramname"><em>out_size</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Calculates y and x positions from sensor data. </p>
+<p >Precision is 0.1 m get y,x position for all players from sensor data sensor data is from function getSensordataForFrame</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">sensor_data</td><td>to extract player positions </td></tr>
+    <tr><td class="paramname">out_size</td><td>desired size of output </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>list of y and x for all players from sensor data </dd></dl>
+
+</div>
+</div>
 <a id="ga358534b315c60aaed3421950ccd6a802" name="ga358534b315c60aaed3421950ccd6a802"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga358534b315c60aaed3421950ccd6a802">&#9670;&nbsp;</a></span>getSensordataForFrame()</h2>
 
@@ -113,7 +257,7 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>utils.DataFactory.gene
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>sensor_data subset df of sensor data from frame </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>sensor_data subset df of sensor data from frame at time </dd></dl>
 
 </div>
 </div>
@@ -270,7 +414,8 @@ def&#160;</td><td class="memItemRight" valign="bottom"><b>utils.DataFactory.gene
 </div><div class="memdoc">
 
 <p>Creates small stack of array from input video. </p>
-<p >This function takes the video cap as input reads several frames downsamples and rescales the frames if applied and converts the frame to grayscale. The output of this function is a stack of np.arrays which contnains the read frames as well as the corresponding times beginning from the start of the video. </p><dl class="params"><dt>Parameters</dt><dd>
+<p >This function takes the video cap as input reads several frames downsamples and rescales the frames if applied and converts the frame to grayscale. The output of this function is a stack of np.arrays which contnains the read frames as well as the corresponding times beginning from the start of the video.</p>
+<dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">cap</td><td>input video capture. </td></tr>
     <tr><td class="paramname">start_frame</td><td>frame number of cap to start with. </td></tr>
