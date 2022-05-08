@@ -194,3 +194,4 @@ cython_debug/
 # End of https://www.toptal.com/developers/gitignore/api/python,visualstudiocode
 background_removal/out_e1_d1.mp4
 background_removal/video_cut.mp4
+background_removal/no_background.mp4
