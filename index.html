@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.3"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>Agil Object Mapping: &lt;div align=&quot;center&quot;&gt;Object Tracking&lt;/div&gt;</title>
+<title>Agil Object Mapping: Object Tracking</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -40,156 +40,67 @@ $(function() {
 <div id="main-nav"></div>
 </div><!-- top -->
 <div><div class="header">
-  <div class="headertitle"><div class="title"><div align="center">Object Tracking</div> </div></div>
+  <div class="headertitle"><div class="title">Object Tracking </div></div>
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p ><a class="anchor" id="md_README"></a> Find each player's x&amp;y postion in the playground from given videos.</p>
 <h1><a class="anchor" id="autotoc_md1"></a>
-&lt;div align="center"&gt;Installation and Execution&lt;/div&gt;</h1>
-<p ><details open="true">
- <summary>Install</summary></details>
-</p>
-<p ><details open="true">
-</details>
-</p>
+Installation and Execution</h1>
 <h2><a class="anchor" id="autotoc_md2"></a>
 Clone Repository</h2>
-<p ><details open="true">
- Python3 is required with all requirements.txt installed including Pytorch&gt;=1.7:</details>
-</p>
-<p ><details open="true">
-</p><div class="fragment"><div class="line">$ git clone https://github.com/tomaslibanomonteiro/Object-Tracking.git</div>
+<p >Python3 is required with all requirements.txt installed including Pytorch&gt;=1.7:</p>
+<div class="fragment"><div class="line">$ git clone https://github.com/tomaslibanomonteiro/Object-Tracking.git</div>
 <div class="line">$ cd Object-Tracking</div>
-</div><!-- fragment --><p></details>
-</p>
-<p ><details open="true">
-</details>
-</p>
-<h2><a class="anchor" id="autotoc_md3"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md3"></a>
 Download Datasets</h2>
-<p ><details open="true">
-</details>
-</p>
-<p ><details open="true">
-Click links to download <a href="https://drive.google.com/file/d/1OrTUqcDlupKqz20r5teMnfLvFnvhVqgP/view?usp=sharing">videos files</a> and <a href="https://drive.google.com/file/d/1onGxXwf2NFWHsZsSpvAMHjWAlqfKKUKJ/view?usp=sharing">object position csv files</a> from google drive. <a href="https://drive.google.com/file/d/152wThRrr2ujar-yxuPtvFmnr6C8P5Y0V/view?usp=sharing">Here</a> is the input video already with no background</details>
-</p>
-<p ><details open="true">
-</details>
-</p>
+<p >Click links to download <a href="https://drive.google.com/file/d/1OrTUqcDlupKqz20r5teMnfLvFnvhVqgP/view?usp=sharing">videos files</a> and <a href="https://drive.google.com/file/d/1onGxXwf2NFWHsZsSpvAMHjWAlqfKKUKJ/view?usp=sharing">object position csv files</a> from google drive. <a href="https://drive.google.com/file/d/152wThRrr2ujar-yxuPtvFmnr6C8P5Y0V/view?usp=sharing">Here</a> is the input video already with no background</p>
 <h2><a class="anchor" id="autotoc_md4"></a>
 Install and Run with Docker</h2>
-<p ><details open="true">
- To install Docker run the following commands:</details>
-</p>
-<p ><details open="true">
-</p><div class="fragment"><div class="line">$ chmod +x install_docker.sh</div>
+<p >To install Docker run the following commands:</p>
+<div class="fragment"><div class="line">$ chmod +x install_docker.sh</div>
 <div class="line">$ ./install_docker.sh</div>
-</div><!-- fragment --><p></details>
-</p>
-<p ><details open="true">
-In order to run the project:</details>
-</p>
-<p ><details open="true">
-</p><div class="fragment"><div class="line">$ chmod +x run.sh # Only one time</div>
+</div><!-- fragment --><p >In order to run the project:</p>
+<div class="fragment"><div class="line">$ chmod +x run.sh # Only one time</div>
 <div class="line">$ ./run.sh</div>
-</div><!-- fragment --><p></details>
-</p>
-<p ><details open="true">
-</details>
-</p>
-<h2><a class="anchor" id="autotoc_md5"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md5"></a>
 Install and Run with Conda</h2>
-<p ><details open="true">
- To install conda environment run following commands:</details>
-</p>
-<p ><details open="true">
-</p><div class="fragment"><div class="line">$ conda create -n object-tracking python=3.8</div>
+<p >To install conda environment run following commands:</p>
+<div class="fragment"><div class="line">$ conda create -n object-tracking python=3.8</div>
 <div class="line">$ conda activate object-tracking</div>
 <div class="line">$ conda install pip</div>
 <div class="line">$ pip install -r requirements.txt</div>
 <div class="line">$ mkdir data/videos/ data/datafiles/ # create data dirs.</div>
-</div><!-- fragment --><p></details>
-</p>
-<p ><details open="true">
-Put the video files and datafiles into data/videos/ and data/datafiles/ respectively firstly.</details>
-</p>
-<p ><details open="true">
-</details>
-</p>
+</div><!-- fragment --><p >Put the video files and datafiles into data/videos/ and data/datafiles/ respectively firstly.</p>
 <h2><a class="anchor" id="autotoc_md6"></a>
 Training the Model</h2>
-<p ><details open="true">
- <summary>Training</summary></details>
-</p>
-<p ><details open="true">
-Run following example for training:</details>
-</p>
-<p ><details open="true">
-</p><div class="fragment"><div class="line">$ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/datafiles/2022-03-01_17-38_positions.csv</div>
-</div><!-- fragment --><p></details>
-</p>
-<p ><details open="true">
-</details>
-</p>
-<h1><a class="anchor" id="autotoc_md7"></a>
-&lt;div align="center"&gt;Documentation&lt;/div&gt;</h1>
+<p >Run following example for training:</p>
+<div class="fragment"><div class="line">$ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/datafiles/2022-03-01_17-38_positions.csv</div>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
+Documentation</h1>
 <p >The Doxygen documentation can be found in the following link: <a href="https://tomaslibanomonteiro.github.io/Object-Tracking/index.html">Documentation</a></p>
 <h1><a class="anchor" id="autotoc_md8"></a>
-&lt;div align="center"&gt;Steps Taken &lt;/div&gt;</h1>
+Steps Taken</h1>
 <p >In order to accomplish our objectives, the project was divided in the following tasks:</p>
 <h2><a class="anchor" id="autotoc_md9"></a>
 Background Removal</h2>
-<p ><details open="true">
- <summary>Run background removal</summary></details>
-</p>
-<p ><details open="true">
-In order to identify the players, there was a necessity to remove the background, namely the field. This way, we obtain frames which only contain the blobs of players.</details>
-</p>
-<p ><details open="true">
-In folder "background_removal", run:</details>
-</p>
-<p ><details open="true">
-</p><div class="fragment"><div class="line">$ python background_removal.py --input FILE_PATH_TO_VIDEO --algo ALGORITHM_NAME</div>
-</div><!-- fragment --><p></details>
-</p>
-<p ><details open="true">
-<b>FILE_PATH_TO_VIDEO</b>: usually, this is the video that we want to remove background: data/videos/20220307-1307-214.mp4 ALGORITHM_NAME: 'KNN' or 'MOG2'</details>
-</p>
-<p ><details open="true">
-<b>Output</b>: video with the foreground of the one given as input</details>
-</p>
-<p ><details open="true">
-</details>
-</p>
+<p >In order to identify the players, there was a necessity to remove the background, namely the field. This way, we obtain frames which only contain the blobs of players.</p>
+<p >In folder "background_removal", run:</p>
+<div class="fragment"><div class="line">$ python background_removal.py --input FILE_PATH_TO_VIDEO --algo ALGORITHM_NAME</div>
+</div><!-- fragment --><p ><b>FILE_PATH_TO_VIDEO</b>: usually, this is the video that we want to remove background: data/videos/20220307-1307-214.mp4 ALGORITHM_NAME: 'KNN' or 'MOG2'</p>
+<p ><b>Output</b>: video with the foreground of the one given as input</p>
 <h2><a class="anchor" id="autotoc_md10"></a>
 Sync Frames</h2>
-<p ><details open="true">
- <summary>Sync Frames Excel</summary></details>
-</p>
-<p ><details open="true">
-The coordinates of the players present on the excel, had an associated time offset with the video. There was a need to correct this offset.</details>
-</p>
-<p ><details open="true">
-</details>
-</p>
+<p >The coordinates of the players present on the excel, had an associated time offset with the video. There was a need to correct this offset.</p>
 <h2><a class="anchor" id="autotoc_md11"></a>
 Binary Frame</h2>
 <p >Since the number of the players present in the video is not always the same, we decided to convert the excel into a binary matrix, containing zeros in the pixels which there are no players, and ones, in case there are. In order to give some tolerance, the closest four points to the central point of the player were also converted to one.</p>
 <p ><b>Running</b>:</p>
 <div class="fragment"><div class="line">$ python visualize_csv_position.py</div>
 </div><!-- fragment --><h1><a class="anchor" id="autotoc_md12"></a>
-&lt;div align="center"&gt;Future work &lt;/div&gt;</h1>
+Future work</h1>
 <h2><a class="anchor" id="autotoc_md13"></a>
 Model Training</h2>
-<p ><details open="true">
- <summary>Training the Model</summary></details>
-</p>
-<p ><details open="true">
-Finally, the last step of the project is to train the model. The Neural Network will receive the video as an input, and output the coordinates of the players. In order to train it, the video and the excel will be separated in training and testing data. The training data will compare the output of the network with the excel containing the real coordinates and learn from it. The objective is for the network to be able to accurately calculate the coordinates of the testing video.</details>
-</p>
-<p ><details open="true">
-</details>
- </p>
+<p >Finally, the last step of the project is to train the model. The Neural Network will receive the video as an input, and output the coordinates of the players. In order to train it, the video and the excel will be separated in training and testing data. The training data will compare the output of the network with the excel containing the real coordinates and learn from it. The objective is for the network to be able to accurately calculate the coordinates of the testing video. </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
