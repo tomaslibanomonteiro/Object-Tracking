@@ -1,5 +1,6 @@
 import unittest
-from Object-Tracking.utils import DataFactory
+import DataFactory
+from utils import DataFactory
 import cv2
 import os
 import numpy as np
