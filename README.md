@@ -1,11 +1,8 @@
-## <div align="center">Object Tracking</div>
+# Object Tracking
 
 Find each player's x&y postion in the playground from given videos.
 
-## <div align="center">Installation and Execution</div>
-
-<details open>
-<summary>Install</summary>
+## Installation and Execution
   
 ### Clone Repository
 
@@ -18,15 +15,8 @@ $ cd Object-Tracking
 
 ### Download Datasets
 
-<!-- <details open> -->
-<!-- <summary>Datasets</summary> -->
-
 Click links to download [videos files](https://drive.google.com/file/d/1OrTUqcDlupKqz20r5teMnfLvFnvhVqgP/view?usp=sharing) and [object position csv files](https://drive.google.com/file/d/1onGxXwf2NFWHsZsSpvAMHjWAlqfKKUKJ/view?usp=sharing) from google drive.
 [Here](https://drive.google.com/file/d/152wThRrr2ujar-yxuPtvFmnr6C8P5Y0V/view?usp=sharing) is the input video already with no background
-
-<!-- </details> -->
-
-<!-- <div align="center">Install and Run with Docker</div> -->
 
 ### Install and Run with Docker
 
@@ -44,8 +34,6 @@ $ chmod +x run.sh # Only one time
 $ ./run.sh
 ```
 
-<!-- <div align="center">Install and Run with Conda </div> -->
-
 ### Install and Run with Conda
 
 To install conda environment run following commands:
@@ -60,12 +48,7 @@ $ mkdir data/videos/ data/datafiles/ # create data dirs.
 
 Put the video files and datafiles into data/videos/ and data/datafiles/ respectively firstly.
 
-</details>
-
 ### Training the Model
-
-<details open>
-<summary>Training</summary>
 
 Run following example for training:
 
@@ -73,21 +56,16 @@ Run following example for training:
 $ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/datafiles/2022-03-01_17-38_positions.csv
 ```
 
-</details>
-
-## <div align="center">Documentation</div>
+## Documentation
 
 The Doxygen documentation can be found in the following link: [Documentation](https://tomaslibanomonteiro.github.io/Object-Tracking/index.html)
 
 
-## <div align="center">Steps Taken </div>
+## Steps Taken 
 
 In order to accomplish our objectives, the project was divided in the following tasks:
 
 ### Background Removal
-
-<details open>
-<summary>Run background removal</summary>
 
 In order to identify the players, there was a necessity to remove the background, namely the field. This way, we obtain frames which only contain the blobs of players.
 
@@ -104,16 +82,11 @@ ALGORITHM_NAME: 'KNN' or 'MOG2'
 
 <!-- In the code, you can change some options regarding the background removal process -->
 
-</details>
 
 ### Sync Frames
 
-<details open>
-<summary>Sync Frames Excel</summary>
-
 The coordinates of the players present on the excel, had an associated time offset with the video. There was a need to correct this offset.
-  
-</details>
+ 
 
 ### Binary Frame
 
@@ -126,12 +99,8 @@ In order to give some tolerance, the closest four points to the central point of
 $ python visualize_csv_position.py
 ```
 
-## <div align="center">Future work </div>
-
+## Future work
 ### Model Training
-
-<details open>
-<summary>Training the Model</summary>
 
 Finally, the last step of the project is to train the model.
 The Neural Network will receive the video as an input, and output the coordinates of the players. 
@@ -139,9 +108,4 @@ In order to train it, the video and the excel will be separated in training and 
 The training data will compare the output of the network with the excel containing the real coordinates and learn from it.
 The objective is for the network to be able to accurately calculate the coordinates of the testing video.
   
-</details>
 
-<!-- <details open>
-<summary>Report Bug</summary>
-1. Can not load simple csv file.
-</details> -->
