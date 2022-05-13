@@ -71,36 +71,181 @@ Install and Run with Conda</h2>
 <div class="line">$ pip install -r requirements.txt</div>
 <div class="line">$ mkdir data/videos/ data/datafiles/ # create data dirs.</div>
 </div><!-- fragment --><p >Put the video files and datafiles into data/videos/ and data/datafiles/ respectively firstly.</p>
+<p >&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD </p>
 <h2><a class="anchor" id="autotoc_md6"></a>
+Generate Training Data</h2>
+<p >Go to the file "save_image_and_labels.ipynb" to generate training data.</p>
+<p >Dataset will be saved in data/dataset/</p>
+<p >Copy dataset dir into Pytorch-UNet/dataset/</p>
+<h2><a class="anchor" id="autotoc_md7"></a>
 Training the Model</h2>
-<p >Run following example for training:</p>
-<div class="fragment"><div class="line">$ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/datafiles/2022-03-01_17-38_positions.csv</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md7"></a>
-Documentation</h1>
-<p >The Doxygen documentation can be found in the following link: <a href="https://tomaslibanomonteiro.github.io/Object-Tracking/index.html">Documentation</a></p>
-<h1><a class="anchor" id="autotoc_md8"></a>
-Steps Taken</h1>
-<p >In order to accomplish our objectives, the project was divided in the following tasks:</p>
-<h2><a class="anchor" id="autotoc_md9"></a>
-Background Removal</h2>
-<p >In order to identify the players, there was a necessity to remove the background, namely the field. This way, we obtain frames which only contain the blobs of players.</p>
-<p >In folder "background_removal", run:</p>
-<div class="fragment"><div class="line">$ python background_removal.py --input FILE_PATH_TO_VIDEO --algo ALGORITHM_NAME</div>
-</div><!-- fragment --><p ><b>FILE_PATH_TO_VIDEO</b>: usually, this is the video that we want to remove background: data/videos/20220307-1307-214.mp4 ALGORITHM_NAME: 'KNN' or 'MOG2'</p>
-<p ><b>Output</b>: video with the foreground of the one given as input</p>
+<p ><details open="true">
+</details>
+</p>
+<p ><details open="true">
+<summary>Training</summary></details>
+</p>
+<p ><details open="true">
+Go to Pytorch-UNet dictionary</details>
+</p>
+<p ><details open="true">
+</p><hr  />
+<p> </details>
+</p>
+<h3><a class="anchor" id="autotoc_md9"></a>
+Training the Model</h3>
+<p ><details open="true">
+ </p><blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<p >&zwj;8d5d7473550a552f96ecfdd966acde7115d189f4 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Run following example for training:</details>
+</p>
+<p ><details open="true">
+default device: CPU</details>
+</p>
+<p ><details open="true">
+</p><div class="fragment"><div class="line">$ python train.py --epochs 1 --batch-size 1</div>
+</div><!-- fragment --><p></details>
+</p>
+<p ><details open="true">
+</details>
+</p>
 <h2><a class="anchor" id="autotoc_md10"></a>
-Sync Frames</h2>
-<p >The coordinates of the players present on the excel, had an associated time offset with the video. There was a need to correct this offset.</p>
+Documentation</h2>
+<p ><details open="true">
+ The Doxygen documentation can be found in the following link: <a href="https://tomaslibanomonteiro.github.io/Object-Tracking/index.html">Documentation</a></details>
+</p>
+<p ><details open="true">
+</details>
+</p>
 <h2><a class="anchor" id="autotoc_md11"></a>
-Binary Frame</h2>
-<p >Since the number of the players present in the video is not always the same, we decided to convert the excel into a binary matrix, containing zeros in the pixels which there are no players, and ones, in case there are. In order to give some tolerance, the closest four points to the central point of the player were also converted to one.</p>
-<p ><b>Running</b>:</p>
-<div class="fragment"><div class="line">$ python visualize_csv_position.py</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md12"></a>
-Future work</h1>
-<h2><a class="anchor" id="autotoc_md13"></a>
-Model Training</h2>
-<p >Finally, the last step of the project is to train the model. The Neural Network will receive the video as an input, and output the coordinates of the players. In order to train it, the video and the excel will be separated in training and testing data. The training data will compare the output of the network with the excel containing the real coordinates and learn from it. The objective is for the network to be able to accurately calculate the coordinates of the testing video. </p>
+Steps Taken</h2>
+<p ><details open="true">
+ In order to accomplish our objectives, the project was divided in the following tasks:</details>
+</p>
+<p ><details open="true">
+</details>
+</p>
+<h3><a class="anchor" id="autotoc_md12"></a>
+Background Removal</h3>
+<p ><details open="true">
+ In order to identify the players, there was a necessity to remove the background, namely the field. This way, we obtain frames which only contain the blobs of players.</details>
+</p>
+<p ><details open="true">
+In folder "background_removal", run:</details>
+</p>
+<p ><details open="true">
+</p><div class="fragment"><div class="line">$ python background_removal.py --input FILE_PATH_TO_VIDEO --algo ALGORITHM_NAME</div>
+</div><!-- fragment --><p></details>
+</p>
+<p ><details open="true">
+<b>FILE_PATH_TO_VIDEO</b>: usually, this is the video that we want to remove background: data/videos/20220307-1307-214.mp4 ALGORITHM_NAME: 'KNN' or 'MOG2'</details>
+</p>
+<p ><details open="true">
+<b>Output</b>: video with the foreground of the one given as input</details>
+</p>
+<p ><details open="true">
+</details>
+</p>
+<h3><a class="anchor" id="autotoc_md13"></a>
+Sync Frames</h3>
+<p ><details open="true">
+ The coordinates of the players present on the excel, had an associated time offset with the video. There was a need to correct this offset.</details>
+</p>
+<p ><details open="true">
+</details>
+</p>
+<h3><a class="anchor" id="autotoc_md14"></a>
+Binary Frame</h3>
+<p ><details open="true">
+ Since the number of the players present in the video is not always the same, we decided to convert the excel into a binary matrix, containing zeros in the pixels which there are no players, and ones, in case there are. In order to give some tolerance, the closest four points to the central point of the player were also converted to one.</details>
+</p>
+<p ><details open="true">
+<b>Running</b>:</details>
+</p>
+<p ><details open="true">
+</p><div class="fragment"><div class="line">$ python visualize_csv_position.py</div>
+</div><!-- fragment --><p></details>
+</p>
+<p ><details open="true">
+</details>
+</p>
+<h2><a class="anchor" id="autotoc_md15"></a>
+Future work</h2>
+<p ><details open="true">
+</details>
+</p>
+<h3><a class="anchor" id="autotoc_md16"></a>
+Model Training</h3>
+<p ><details open="true">
+ &lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD <details open="true">
+</details>
+</details>
+</p>
+<p ><details open="true">
+<details open="true">
+<summary>Training the Model</summary></details>
+</details>
+</p>
+<p ><details open="true">
+<details open="true">
+</p><hr  />
+ <blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<p >&zwj;8d5d7473550a552f96ecfdd966acde7115d189f4 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p>Finally, the last step of the project is to train the model. The Neural Network will receive the video as an input, and output the coordinates of the players. In order to train it, the video and the excel will be separated in training and testing data. The training data will compare the output of the network with the excel containing the real coordinates and learn from it. The objective is for the network to be able to accurately calculate the coordinates of the testing video.</details>
+</details>
+</p>
+<p ><details open="true">
+<details open="true">
+&lt;&lt;&lt;&lt;&lt;&lt;&lt; HEAD</details>
+</details>
+</p>
+<p ><details open="true">
+<details open="true">
+</p><hr  />
+ <blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<blockquote class="doxtable">
+<p >&zwj;8d5d7473550a552f96ecfdd966acde7115d189f4 </p>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+</blockquote>
+<p></details>
+</details>
+</p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
