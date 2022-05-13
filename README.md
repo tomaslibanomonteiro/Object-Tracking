@@ -62,15 +62,32 @@ Put the video files and datafiles into data/videos/ and data/datafiles/ respecti
 
 </details>
 
+
+
+### Generate Training Data
+
+Go to the file "save_image_and_labels.ipynb" to generate training data.
+
+Dataset will be saved in data/dataset/
+
+Copy dataset dir into Pytorch-UNet/dataset/
+
+
 ### Training the Model
 
 <details open>
+
 <summary>Training</summary>
+
+Go to Pytorch-UNet dictionary
 
 Run following example for training:
 
+
+default device: CPU
+
 ```bash
-$ python train.py --videos data/videos/20220301-1638-214.mp4 --datafiles data/datafiles/2022-03-01_17-38_positions.csv
+$ python train.py --epochs 1 --batch-size 1
 ```
 
 </details>
@@ -131,6 +148,7 @@ $ python visualize_csv_position.py
 ### Model Training
 
 <details open>
+
 <summary>Training the Model</summary>
 
 Finally, the last step of the project is to train the model.
@@ -145,3 +163,4 @@ The objective is for the network to be able to accurately calculate the coordina
 <summary>Report Bug</summary>
 1. Can not load simple csv file.
 </details> -->
+
