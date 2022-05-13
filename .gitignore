@@ -6,9 +6,10 @@
 # file properties cache/storage on macOS
 .DS_Store
 
-# Video resources and csv datafiles
+# Video resources, csv datafiles, dataset
 data/datafiles
 data/videos
+data/dataset
 
 # Test scripts 
 

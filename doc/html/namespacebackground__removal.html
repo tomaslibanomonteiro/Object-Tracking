@@ -66,24 +66,31 @@ Functions</h2></td></tr>
 Variables</h2></td></tr>
 <tr class="memitem:a8c26f0d26f7bdc4068d23dcefd9ba609"><td class="memItemLeft" align="right" valign="top"><a id="a8c26f0d26f7bdc4068d23dcefd9ba609" name="a8c26f0d26f7bdc4068d23dcefd9ba609"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>DEBUG_INFO</b> = 0</td></tr>
+<tr class="memdesc:a8c26f0d26f7bdc4068d23dcefd9ba609"><td class="mdescLeft">&#160;</td><td class="mdescRight">Debug Flag: Set to "1" to see how long a frame takes to be processed and results frame by frame in "live" mode (can slow down the process) <br /></td></tr>
 <tr class="separator:a8c26f0d26f7bdc4068d23dcefd9ba609"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afa6ad92ef473f3bd17fd1950ceff7c78"><td class="memItemLeft" align="right" valign="top"><a id="afa6ad92ef473f3bd17fd1950ceff7c78" name="afa6ad92ef473f3bd17fd1950ceff7c78"></a>
 string&#160;</td><td class="memItemRight" valign="bottom"><b>OUT_VIDEO_NAME</b> = &quot;foreground.mp4&quot;</td></tr>
+<tr class="memdesc:afa6ad92ef473f3bd17fd1950ceff7c78"><td class="mdescLeft">&#160;</td><td class="mdescRight">Name of output video. <br /></td></tr>
 <tr class="separator:afa6ad92ef473f3bd17fd1950ceff7c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a38f7f30a06613a43c837378633dd30a6"><td class="memItemLeft" align="right" valign="top"><a id="a38f7f30a06613a43c837378633dd30a6" name="a38f7f30a06613a43c837378633dd30a6"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>FPS</b> = 30</td></tr>
+<tr class="memdesc:a38f7f30a06613a43c837378633dd30a6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Frames per second in output video (10-30? -&gt; see size) <br /></td></tr>
 <tr class="separator:a38f7f30a06613a43c837378633dd30a6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a079f86fa14c83d3fb3e145474a8d8a74"><td class="memItemLeft" align="right" valign="top"><a id="a079f86fa14c83d3fb3e145474a8d8a74" name="a079f86fa14c83d3fb3e145474a8d8a74"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>FIRST_ERODE_NUM</b> = 0</td></tr>
+<tr class="memdesc:a079f86fa14c83d3fb3e145474a8d8a74"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of times to erode frame (remove solo pixels) <br /></td></tr>
 <tr class="separator:a079f86fa14c83d3fb3e145474a8d8a74"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:afd819a095cb860be7b0a199bd8fdee31"><td class="memItemLeft" align="right" valign="top"><a id="afd819a095cb860be7b0a199bd8fdee31" name="afd819a095cb860be7b0a199bd8fdee31"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>DILATE_NUM</b> = 0</td></tr>
+<tr class="memdesc:afd819a095cb860be7b0a199bd8fdee31"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of times to dilate frame (make players "fatter") <br /></td></tr>
 <tr class="separator:afd819a095cb860be7b0a199bd8fdee31"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa9c3cd01295c1c1f4366eb3613ff0c21"><td class="memItemLeft" align="right" valign="top"><a id="aa9c3cd01295c1c1f4366eb3613ff0c21" name="aa9c3cd01295c1c1f4366eb3613ff0c21"></a>
 int&#160;</td><td class="memItemRight" valign="bottom"><b>SECOND_ERODE_NUM</b> = 0</td></tr>
+<tr class="memdesc:aa9c3cd01295c1c1f4366eb3613ff0c21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of times to erode frame after dilate (remove solo pixels) <br /></td></tr>
 <tr class="separator:aa9c3cd01295c1c1f4366eb3613ff0c21"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a996be2d8326dae568cd19cc521731dc9"><td class="memItemLeft" align="right" valign="top"><a id="a996be2d8326dae568cd19cc521731dc9" name="a996be2d8326dae568cd19cc521731dc9"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><b>kernel</b> = np.ones((3, 3),np.uint8)</td></tr>
+<tr class="memdesc:a996be2d8326dae568cd19cc521731dc9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Erode filter size (if it is bigger, will remove more ungrouped pixels) <br /></td></tr>
 <tr class="separator:a996be2d8326dae568cd19cc521731dc9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>

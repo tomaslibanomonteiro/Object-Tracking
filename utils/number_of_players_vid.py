@@ -31,7 +31,7 @@ def numberOfPlayersInFrame(vidcap, milliSec):
 
 
 ## @brief find number of players in a video
-# @param videofile 
+# @param vidcap 
 # @return number of players in the video
 def numberOfPlayersInVideo(vidcap):
   numbers = [0] * 30

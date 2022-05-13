@@ -21,18 +21,23 @@ import argparse
 # ARGUMENTS THAT CAN BE CHANGED BELOW
 #
 
-#if 1: see how long a frame takes to be processed and results frame by frame in "live" mode (can slow down the process)
-DEBUG_INFO = 0               
+## Debug Flag: Set to "1" to see how long a frame takes to be processed and results frame by frame in "live" mode (can slow down the process)
+DEBUG_INFO = 0     
 
-#output video
-OUT_VIDEO_NAME = "foreground.mp4"      #name
-FPS = 30                        #frames per second in new video (10-30? -> see size)
 
-#filter settings
-FIRST_ERODE_NUM = 0     #number of times to erode frame (remove solo pixels)
-DILATE_NUM = 0          #number of times to dilate frame (make players "fatter")
-SECOND_ERODE_NUM = 0    #number of times to erode frame after dilate (remove solo pixels)
-kernel = np.ones((3, 3),np.uint8) #erode filter size (if it is bigger, will remove more ungrouped pixels)
+## Name of output video
+OUT_VIDEO_NAME = "foreground.mp4"    
+## Frames per second in output video (10-30? -> see size)
+FPS = 30
+# Filter settings
+## Number of times to erode frame (remove solo pixels)
+FIRST_ERODE_NUM = 0
+## Number of times to dilate frame (make players "fatter")
+DILATE_NUM = 0
+## Number of times to erode frame after dilate (remove solo pixels)
+SECOND_ERODE_NUM = 0
+## Erode filter size (if it is bigger, will remove more ungrouped pixels)
+kernel = np.ones((3, 3),np.uint8) 
 
 #
 # REST OF THE CODE
