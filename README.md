@@ -48,10 +48,6 @@ $ mkdir data/videos/ data/datafiles/ # create data dirs.
 
 Put the video files and datafiles into data/videos/ and data/datafiles/ respectively firstly.
 
-<<<<<<< HEAD
-</details>
-
-
 
 ### Generate Training Data
 
@@ -63,17 +59,6 @@ Copy dataset dir into Pytorch-UNet/dataset/
 
 
 ### Training the Model
-
-<details open>
-
-<summary>Training</summary>
-
-Go to Pytorch-UNet dictionary
-
-=======
-### Training the Model
-
->>>>>>> 8d5d7473550a552f96ecfdd966acde7115d189f4
 Run following example for training:
 
 
@@ -129,13 +114,6 @@ $ python visualize_csv_position.py
 ## Future work
 ### Model Training
 
-<<<<<<< HEAD
-<details open>
-
-<summary>Training the Model</summary>
-
-=======
->>>>>>> 8d5d7473550a552f96ecfdd966acde7115d189f4
 Finally, the last step of the project is to train the model.
 The Neural Network will receive the video as an input, and output the coordinates of the players. 
 In order to train it, the video and the excel will be separated in training and testing data.
@@ -143,11 +121,3 @@ The training data will compare the output of the network with the excel containi
 The objective is for the network to be able to accurately calculate the coordinates of the testing video.
   
 
-<<<<<<< HEAD
-<!-- <details open>
-<summary>Report Bug</summary>
-1. Can not load simple csv file.
-</details> -->
-
-=======
->>>>>>> 8d5d7473550a552f96ecfdd966acde7115d189f4
